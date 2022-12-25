@@ -10,6 +10,12 @@ import SwiftUI
 @main
 struct ScreensApp: App {
     var body: some Scene {
+//        MenuBarExtra {
+//            ContentView()
+//        } label: {
+//            Image(systemName: "terminal")
+//        }
+
         WindowGroup {
             ContentView()
         }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var model = ScreensProvider()
+    @StateObject var model = ViewModel(source: LocalScreenSource())
+
     func runScript(_ script: String) -> NSDictionary? {
         let appleScript = NSAppleScript(source: """
             tell application "Terminal"
@@ -20,7 +21,13 @@ struct ContentView: View {
         appleScript.executeAndReturnError(&error)
         return error
     }
+    var picker: some View {
+        Picker("Screen Source", selection: $model.source) {
+            Text("Local").tag(LocalScreenSource().any)
+        }
+    }
     var body: some View {
+        picker
         Menu("Click Me") {
             ForEach(model.screens) { screen in
                 Button {
