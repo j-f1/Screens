@@ -13,7 +13,7 @@ protocol ScreenSource: Hashable {
 }
 
 extension ScreenSource {
-    var any: AnyScreenSource {
+    var erased: AnyScreenSource {
         if let any = self as? AnyScreenSource {
             return any
         } else if let local = self as? LocalScreenSource {

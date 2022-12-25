@@ -23,7 +23,7 @@ struct LocalScreenSource: ScreenSource {
                     do {
                         try pipe.fileHandleForWriting.close()
                         if let string = String(data: pipe.fileHandleForReading.availableData, encoding: .utf8) {
-                            let screens = [Screen](screenOutput: string)
+                            let screens = [Screen](source: erased, screenOutput: string)
                             DispatchQueue.main.async {
                                 continuation.resume(returning: screens)
                             }
