@@ -14,6 +14,11 @@
 		850437982958DCFD00F9424C /* SSHScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437972958DCFD00F9424C /* SSHScreenSource.swift */; };
 		856F94DF2958E36900DEE579 /* libssh2.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 850437B62958E2A800F9424C /* libssh2.1.dylib */; };
 		856F94E02958E36A00DEE579 /* libssh2.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 850437B62958E2A800F9424C /* libssh2.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		856F94E32958E94F00DEE579 /* libssl.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 856F94E22958E94F00DEE579 /* libssl.1.1.dylib */; };
+		856F94E42958E94F00DEE579 /* libssl.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 856F94E22958E94F00DEE579 /* libssl.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		856F94E82958E99600DEE579 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		856F94E92958E99C00DEE579 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */; };
+		856F94EA2958E99C00DEE579 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		85CBBFA62954CD8D00E3C634 /* ScreensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */; };
 		85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA72954CD8D00E3C634 /* ContentView.swift */; };
 		85CBBFAA2954CD8E00E3C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85CBBFA92954CD8E00E3C634 /* Assets.xcassets */; };
@@ -27,9 +32,22 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolderSpec = 16;
 			files = (
 				856F94E02958E36A00DEE579 /* libssh2.1.dylib in Embed Libraries */,
+				856F94E42958E94F00DEE579 /* libssl.1.1.dylib in Embed Libraries */,
+				856F94E82958E99600DEE579 /* libcrypto.1.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		856F94EB2958E99C00DEE579 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				856F94EA2958E99C00DEE579 /* libcrypto.1.1.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,7 +61,8 @@
 		850437922958D40E00F9424C /* LocalScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalScreenSource.swift; sourceTree = "<group>"; };
 		850437972958DCFD00F9424C /* SSHScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHScreenSource.swift; sourceTree = "<group>"; };
 		850437B62958E2A800F9424C /* libssh2.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh2.1.dylib; path = ../../../../../opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.1.dylib; sourceTree = "<group>"; };
-		856F94DA2958E2CA00DEE579 /* libssh2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssh2.a; path = ../../../../../opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.a; sourceTree = "<group>"; };
+		856F94E22958E94F00DEE579 /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = "../../../../../opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libssl.1.1.dylib"; sourceTree = "<group>"; };
+		856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = "/opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libcrypto.1.1.dylib"; sourceTree = "<absolute>"; };
 		85CBBFA22954CD8D00E3C634 /* Screens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensApp.swift; sourceTree = "<group>"; };
 		85CBBFA72954CD8D00E3C634 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,8 +78,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				856F94DF2958E36900DEE579 /* libssh2.1.dylib in Frameworks */,
 				850437962958DCF400F9424C /* Shout in Frameworks */,
+				856F94E92958E99C00DEE579 /* libcrypto.1.1.dylib in Frameworks */,
+				856F94E32958E94F00DEE579 /* libssl.1.1.dylib in Frameworks */,
+				856F94DF2958E36900DEE579 /* libssh2.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +91,8 @@
 		850437992958DFFE00F9424C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				856F94DA2958E2CA00DEE579 /* libssh2.a */,
+				856F94E22958E94F00DEE579 /* libssl.1.1.dylib */,
+				856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */,
 				850437B62958E2A800F9424C /* libssh2.1.dylib */,
 			);
 			name = Frameworks;
@@ -131,6 +153,7 @@
 				85CBBF9F2954CD8D00E3C634 /* Frameworks */,
 				85CBBFA02954CD8D00E3C634 /* Resources */,
 				8504379D2958E01700F9424C /* Embed Libraries */,
+				856F94EB2958E99C00DEE579 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -345,6 +368,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib",
+					"$(PROJECT_DIR)",
+					/opt/homebrew/Cellar/libssh2/1.10.0/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jedfox.Screens;
@@ -374,6 +403,12 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib",
+					"$(PROJECT_DIR)",
+					/opt/homebrew/Cellar/libssh2/1.10.0/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MARKETING_VERSION = 1.0;

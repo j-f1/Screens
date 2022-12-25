@@ -17,6 +17,8 @@ extension ScreenSource {
             return any
         } else if let local = self as? LocalScreenSource {
             return .local(local)
+        } else if let ssh = self as? SSHScreenSource {
+            return .ssh(ssh)
         } else {
             fatalError("Invalid ScreenSource type \(Self.self)")
         }
@@ -25,10 +27,12 @@ extension ScreenSource {
 
 enum AnyScreenSource: ScreenSource {
     case local(LocalScreenSource)
+    case ssh(SSHScreenSource)
 
     func update() async throws -> [Screen] {
         switch self {
         case .local(let local): return try await local.update()
+        case .ssh(let ssh): return try await ssh.update()
         }
     }
 }

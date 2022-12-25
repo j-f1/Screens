@@ -9,8 +9,7 @@ import Foundation
 import Shout
 
 final class SSHScreenSource: ScreenSource {
-    internal init(shell: String = "/bin/bash", screenCommand: String = "screen", username: String, host: String, port: Int32 = 22) {
-        self.shell = shell
+    internal init(screenCommand: String = "screen", username: String, host: String, port: Int32 = 22) {
         self.screenCommand = screenCommand
         self.username = username
         self.host = host
@@ -22,21 +21,19 @@ final class SSHScreenSource: ScreenSource {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(shell)
         hasher.combine(screenCommand)
         hasher.combine(username)
         hasher.combine(host)
         hasher.combine(port)
     }
 
-    let shell: String
     let screenCommand: String
     let username: String
     let host: String
     let port: Int32
     
     private enum Error: Swift.Error {
-        case exit(status: Int32)
+        case exit(status: Int32, output: String)
     }
     
     private var connection: SSH?
@@ -45,7 +42,7 @@ final class SSHScreenSource: ScreenSource {
             return connection
         }
         let connection = try SSH(host: host, port: port)
-        try connection.authenticateByAgent(username: username)
+        try connection.authenticate(username: "jed", authMethod: SSHKey(privateKey: "/Users/\(NSUserName())/.ssh/id_ed25519"))
         self.connection = connection
         return connection
     }
@@ -62,9 +59,9 @@ final class SSHScreenSource: ScreenSource {
     }
     
     private func readScreens(from connection: SSH) throws -> [Screen] {
-        let (status, output) = try connection.capture("\(shell) -c '\(screenCommand) -list")
-        if status != 0 {
-            throw Error.exit(status: status)
+        let (status, output) = try connection.capture("\(screenCommand) -list")
+        if status != 1 {
+            throw Error.exit(status: status, output: output)
         }
         return .init(screenOutput: output)
     }

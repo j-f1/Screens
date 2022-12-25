@@ -24,6 +24,7 @@ struct ContentView: View {
     var picker: some View {
         Picker("Screen Source", selection: $model.source) {
             Text("Local").tag(LocalScreenSource().any)
+            Text("SSH").tag(SSHScreenSource(username: "jed", host: "mini").any)
         }
     }
     var body: some View {
