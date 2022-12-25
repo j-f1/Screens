@@ -18,7 +18,7 @@ class ViewModel: ObservableObject {
     @Published var screens = [Screen]()
 
     init(source: some ScreenSource) {
-        self.source = source.erased
+        self.source = AnyScreenSource(source)
 
         let timer = Timer(fire: .now, interval: 1, repeats: true) { [weak self] _ in
             self?.update()

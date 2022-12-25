@@ -29,7 +29,7 @@ struct Screen: Identifiable {
         "screen -r \(pid)"
     }
     
-    fileprivate init?(source: AnyScreenSource, name: some StringProtocol, status: some StringProtocol) {
+    fileprivate init?(source: some ScreenSource, name: some StringProtocol, status: some StringProtocol) {
         let splits = name.split(maxSplits: 1, omittingEmptySubsequences: false, whereSeparator: { $0 == "." })
         guard splits.count == 2 else { return nil }
         guard let pid = pid_t(splits[0]) else { return nil }
@@ -37,7 +37,7 @@ struct Screen: Identifiable {
         self.name = String(splits[1])
         guard let status = Status(rawValue: String(status)) else { return nil }
         self.status = status
-        self.source = source
+        self.source = AnyScreenSource(source)
     }
     
     var id: pid_t {
@@ -46,7 +46,7 @@ struct Screen: Identifiable {
 }
 
 extension [Screen] {
-    init(source: AnyScreenSource, screenOutput: String) {
+    init(source: some ScreenSource, screenOutput: String) {
         self = screenOutput
             .split(separator: "\r\n")[1]
             .split(separator: "\n")

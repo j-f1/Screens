@@ -67,7 +67,7 @@ final class SSHScreenSource: ScreenSource {
         if status != 1 {
             throw Error.exit(status: status, output: output)
         }
-        return .init(source: erased, screenOutput: output)
+        return .init(source: self, screenOutput: output)
     }
     
 }
