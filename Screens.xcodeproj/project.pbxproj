@@ -11,15 +11,20 @@
 		85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA72954CD8D00E3C634 /* ContentView.swift */; };
 		85CBBFAA2954CD8E00E3C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85CBBFA92954CD8E00E3C634 /* Assets.xcassets */; };
 		85CBBFAD2954CD8E00E3C634 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85CBBFAC2954CD8E00E3C634 /* Preview Assets.xcassets */; };
+		85CBBFB52954CDE500E3C634 /* ScreensModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFB42954CDE500E3C634 /* ScreensModel.swift */; };
+		85CBBFB72954D35A00E3C634 /* ScreenOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFB62954D35A00E3C634 /* ScreenOutputParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8504378D2958CE5600F9424C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		85CBBFA22954CD8D00E3C634 /* Screens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensApp.swift; sourceTree = "<group>"; };
 		85CBBFA72954CD8D00E3C634 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		85CBBFA92954CD8E00E3C634 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85CBBFAC2954CD8E00E3C634 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		85CBBFAE2954CD8E00E3C634 /* Screens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Screens.entitlements; sourceTree = "<group>"; };
+		85CBBFB42954CDE500E3C634 /* ScreensModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensModel.swift; sourceTree = "<group>"; };
+		85CBBFB62954D35A00E3C634 /* ScreenOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenOutputParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +57,11 @@
 		85CBBFA42954CD8D00E3C634 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				8504378D2958CE5600F9424C /* Info.plist */,
 				85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */,
 				85CBBFA72954CD8D00E3C634 /* ContentView.swift */,
+				85CBBFB42954CDE500E3C634 /* ScreensModel.swift */,
+				85CBBFB62954D35A00E3C634 /* ScreenOutputParser.swift */,
 				85CBBFA92954CD8E00E3C634 /* Assets.xcassets */,
 				85CBBFAE2954CD8E00E3C634 /* Screens.entitlements */,
 				85CBBFAB2954CD8E00E3C634 /* Preview Content */,
@@ -139,6 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85CBBFB52954CDE500E3C634 /* ScreensModel.swift in Sources */,
+				85CBBFB72954D35A00E3C634 /* ScreenOutputParser.swift in Sources */,
 				85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */,
 				85CBBFA62954CD8D00E3C634 /* ScreensApp.swift in Sources */,
 			);
@@ -274,11 +284,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Screens/Info.plist;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Allows opening screens in Terminal";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jedfox.Screens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -301,11 +314,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Screens/Info.plist;
+				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Allows opening screens in Terminal";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jedfox.Screens;
 				PRODUCT_NAME = "$(TARGET_NAME)";

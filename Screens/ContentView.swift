@@ -8,12 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var model = ScreensProvider()
+    func runScript(_ script: String) -> NSDictionary? {
+        let appleScript = NSAppleScript(source: """
+            tell application "Terminal"
+                activate
+                do script "\(script)"
+            end tell
+        """)!
+        var error: NSDictionary?
+        appleScript.executeAndReturnError(&error)
+        return error
+    }
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        List(model.screens) { screen in
+            HStack {
+                Text(screen.name)
+                Spacer()
+                Text(String(screen.pid)).foregroundColor(.secondary)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture(count: 2) {
+                if let error = runScript("screen -r \(screen.pid)") {
+                    print(error)
+                }
+            }
         }
         .padding()
     }
