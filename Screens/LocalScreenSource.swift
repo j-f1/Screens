@@ -44,7 +44,7 @@ class LocalScreenSource: ScreenSource {
     }
     
     func command(for screen: Screen) -> String {
-        screen.command
+        screen.baseCommand
     }
     
     static func == (lhs: LocalScreenSource, rhs: LocalScreenSource) -> Bool {

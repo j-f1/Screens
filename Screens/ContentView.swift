@@ -8,9 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var model = ViewModel(source: LocalScreenSource())
+    @StateObject var localModel = ViewModel(source: LocalScreenSource())
+    @StateObject var sshModel = ViewModel(source: SSHScreenSource(username: "jed", host: "mini"))
 
-    func runScript(_ script: String) -> NSDictionary? {
+    var body: some View {
+        Menu("Click Me") {
+            Section("Local") {
+                ForEach(localModel.screens) { screen in
+                    ScreenButton(screen: screen)
+                }
+            }
+            Section("SSH: jed@mini") {
+                ForEach(sshModel.screens) { screen in
+                    ScreenButton(screen: screen)
+                }
+            }
+        }
+        .padding()
+    }
+}
+
+struct ScreenButton: View {
+    let screen: Screen
+
+    private func runScript(_ script: String) -> NSDictionary? {
         let appleScript = NSAppleScript(source: """
             tell application "Terminal"
                 activate
@@ -21,27 +42,16 @@ struct ContentView: View {
         appleScript.executeAndReturnError(&error)
         return error
     }
-    var picker: some View {
-        Picker("Screen Source", selection: $model.source) {
-            Text("Local").tag(AnyScreenSource(LocalScreenSource()))
-            Text("SSH").tag(AnyScreenSource(SSHScreenSource(username: "jed", host: "mini")))
-        }
-    }
+    
     var body: some View {
-        picker
-        Menu("Click Me") {
-            ForEach(model.screens) { screen in
-                Button {
-                    if let error = runScript(model.source.command(for: screen)) {
-                        print(error)
-                    }
-                } label: {
-                    Text(screen.name + (screen.status.label.map { " " + $0 } ?? ""))
-                        .help(String(screen.pid))
-                }.disabled(screen.status == .attached)
+        Button {
+            if let error = runScript(screen.command) {
+                print(error)
             }
-        }
-        .padding()
+        } label: {
+            Text(screen.name + (screen.status.label.map { " " + $0 } ?? ""))
+                .help(String(screen.pid))
+        }.disabled(screen.status == .attached)
     }
 }
 

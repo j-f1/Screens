@@ -7,18 +7,14 @@
 
 import Foundation
 
-class ViewModel: ObservableObject {
+class ViewModel<Source: ScreenSource>: ObservableObject {
     private var timer: Timer?
     
-    @Published var source: AnyScreenSource {
-        didSet {
-            self.update()
-        }
-    }
+    let source: Source
     @Published var screens = [Screen]()
 
-    init(source: some ScreenSource) {
-        self.source = AnyScreenSource(source)
+    init(source: Source) {
+        self.source = source
 
         let timer = Timer(fire: .now, interval: 1, repeats: true) { [weak self] _ in
             self?.update()

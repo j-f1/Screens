@@ -26,6 +26,10 @@ struct Screen: Identifiable {
     }
     
     var command: String {
+        source.command(for: self)
+    }
+
+    var baseCommand: String {
         "screen -r \(pid)"
     }
     

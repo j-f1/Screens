@@ -59,7 +59,7 @@ final class SSHScreenSource: ScreenSource {
     }
     
     func command(for screen: Screen) -> String {
-        "ssh \(username)@\(host) -t \(screen.command)"
+        "ssh \(username)@\(host) -t \(screen.baseCommand)"
     }
     
     private func readScreens(from connection: SSH) throws -> [Screen] {
