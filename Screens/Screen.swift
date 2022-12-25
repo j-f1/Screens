@@ -24,6 +24,10 @@ struct Screen: Identifiable {
         }
     }
     
+    var command: String {
+        "screen -r \(pid)"
+    }
+    
     fileprivate init?(name: some StringProtocol, status: some StringProtocol) {
         let splits = name.split(maxSplits: 1, omittingEmptySubsequences: false, whereSeparator: { $0 == "." })
         guard splits.count == 2 else { return nil }

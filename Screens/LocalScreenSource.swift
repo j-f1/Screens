@@ -42,4 +42,8 @@ struct LocalScreenSource: ScreenSource {
             }
         }
     }
+    
+    func command(for screen: Screen) -> String {
+        screen.command
+    }
 }

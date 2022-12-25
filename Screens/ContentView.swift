@@ -32,7 +32,7 @@ struct ContentView: View {
         Menu("Click Me") {
             ForEach(model.screens) { screen in
                 Button {
-                    if let error = runScript("screen -r \(screen.pid)") {
+                    if let error = runScript(model.source.command(for: screen)) {
                         print(error)
                     }
                 } label: {

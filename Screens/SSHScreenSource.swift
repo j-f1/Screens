@@ -42,7 +42,7 @@ final class SSHScreenSource: ScreenSource {
             return connection
         }
         let connection = try SSH(host: host, port: port)
-        try connection.authenticate(username: "jed", authMethod: SSHKey(privateKey: "/Users/\(NSUserName())/.ssh/id_ed25519"))
+        try connection.authenticate(username: username, authMethod: SSHKey(privateKey: "/Users/\(NSUserName())/.ssh/id_ed25519"))
         self.connection = connection
         return connection
     }
@@ -56,6 +56,10 @@ final class SSHScreenSource: ScreenSource {
             self.connection = nil
             return try readScreens(from: try currentConnection())
         }
+    }
+    
+    func command(for screen: Screen) -> String {
+        "ssh \(username)@\(host) -t \(screen.command)"
     }
     
     private func readScreens(from connection: SSH) throws -> [Screen] {

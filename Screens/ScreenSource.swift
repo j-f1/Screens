@@ -9,6 +9,7 @@ import Foundation
 
 protocol ScreenSource: Hashable {
     func update() async throws -> [Screen]
+    func command(for screen: Screen) -> String
 }
 
 extension ScreenSource {
@@ -33,6 +34,15 @@ enum AnyScreenSource: ScreenSource {
         switch self {
         case .local(let local): return try await local.update()
         case .ssh(let ssh): return try await ssh.update()
+        }
+    }
+    
+    func command(for screen: Screen) -> String {
+        switch self {
+        case .local(let local):
+            return local.command(for: screen)
+        case .ssh(let ssh):
+            return ssh.command(for: screen)
         }
     }
 }
