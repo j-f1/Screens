@@ -30,23 +30,23 @@ struct ContentView: View {
 
 struct ScreenButton: View {
     let screen: Screen
-
-    private func runScript(_ script: String) -> NSDictionary? {
-        let appleScript = NSAppleScript(source: """
-            tell application "Terminal"
-                activate
-                do script "\(script)"
-            end tell
-        """)!
-        var error: NSDictionary?
-        appleScript.executeAndReturnError(&error)
-        return error
+    
+    private func runScript(_ script: String) throws {
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).command")
+        try script.write(to: tempURL, atomically: false, encoding: .utf8)
+        try FileManager.default.setAttributes([.posixPermissions: NSNumber(value: 0o700)], ofItemAtPath: tempURL.path)
+        NSWorkspace.shared.open(tempURL)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            try? FileManager.default.removeItem(at: tempURL)
+        }
     }
     
     var body: some View {
         Button {
-            if let error = runScript(screen.command) {
-                print(error)
+            do {
+                try runScript(screen.command)
+            } catch {
+                NSAlert(error: error).runModal()
             }
         } label: {
             Text(screen.name + (screen.status.label.map { " " + $0 } ?? ""))
