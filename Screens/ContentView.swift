@@ -21,17 +21,16 @@ struct ContentView: View {
         return error
     }
     var body: some View {
-        List(model.screens) { screen in
-            HStack {
-                Text(screen.name)
-                Spacer()
-                Text(String(screen.pid)).foregroundColor(.secondary)
-            }
-            .contentShape(Rectangle())
-            .onTapGesture(count: 2) {
-                if let error = runScript("screen -r \(screen.pid)") {
-                    print(error)
-                }
+        Menu("Click Me") {
+            ForEach(model.screens) { screen in
+                Button {
+                    if let error = runScript("screen -r \(screen.pid)") {
+                        print(error)
+                    }
+                } label: {
+                    Text(screen.name + (screen.status.label.map { " " + $0 } ?? ""))
+                        .help(String(screen.pid))
+                }.disabled(screen.status == .attached)
             }
         }
         .padding()
