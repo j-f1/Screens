@@ -10,6 +10,10 @@
 		8504378F2958D34000F9424C /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504378E2958D34000F9424C /* Screen.swift */; };
 		850437912958D3F300F9424C /* ScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437902958D3F300F9424C /* ScreenSource.swift */; };
 		850437932958D40E00F9424C /* LocalScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437922958D40E00F9424C /* LocalScreenSource.swift */; };
+		850437962958DCF400F9424C /* Shout in Frameworks */ = {isa = PBXBuildFile; productRef = 850437952958DCF400F9424C /* Shout */; };
+		850437982958DCFD00F9424C /* SSHScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437972958DCFD00F9424C /* SSHScreenSource.swift */; };
+		856F94DF2958E36900DEE579 /* libssh2.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 850437B62958E2A800F9424C /* libssh2.1.dylib */; };
+		856F94E02958E36A00DEE579 /* libssh2.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 850437B62958E2A800F9424C /* libssh2.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		85CBBFA62954CD8D00E3C634 /* ScreensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */; };
 		85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA72954CD8D00E3C634 /* ContentView.swift */; };
 		85CBBFAA2954CD8E00E3C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85CBBFA92954CD8E00E3C634 /* Assets.xcassets */; };
@@ -18,11 +22,28 @@
 		85CBBFB72954D35A00E3C634 /* ScreenOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFB62954D35A00E3C634 /* ScreenOutputParser.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8504379D2958E01700F9424C /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				856F94E02958E36A00DEE579 /* libssh2.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8504378D2958CE5600F9424C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8504378E2958D34000F9424C /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		850437902958D3F300F9424C /* ScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSource.swift; sourceTree = "<group>"; };
 		850437922958D40E00F9424C /* LocalScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalScreenSource.swift; sourceTree = "<group>"; };
+		850437972958DCFD00F9424C /* SSHScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHScreenSource.swift; sourceTree = "<group>"; };
+		850437B62958E2A800F9424C /* libssh2.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh2.1.dylib; path = ../../../../../opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.1.dylib; sourceTree = "<group>"; };
+		856F94DA2958E2CA00DEE579 /* libssh2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssh2.a; path = ../../../../../opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.a; sourceTree = "<group>"; };
 		85CBBFA22954CD8D00E3C634 /* Screens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensApp.swift; sourceTree = "<group>"; };
 		85CBBFA72954CD8D00E3C634 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,17 +59,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				856F94DF2958E36900DEE579 /* libssh2.1.dylib in Frameworks */,
+				850437962958DCF400F9424C /* Shout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		850437992958DFFE00F9424C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				856F94DA2958E2CA00DEE579 /* libssh2.a */,
+				850437B62958E2A800F9424C /* libssh2.1.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		85CBBF992954CD8D00E3C634 = {
 			isa = PBXGroup;
 			children = (
 				85CBBFA42954CD8D00E3C634 /* Screens */,
 				85CBBFA32954CD8D00E3C634 /* Products */,
+				850437992958DFFE00F9424C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +102,7 @@
 				85CBBFB42954CDE500E3C634 /* ViewModel.swift */,
 				850437902958D3F300F9424C /* ScreenSource.swift */,
 				850437922958D40E00F9424C /* LocalScreenSource.swift */,
+				850437972958DCFD00F9424C /* SSHScreenSource.swift */,
 				8504378E2958D34000F9424C /* Screen.swift */,
 				85CBBFB62954D35A00E3C634 /* ScreenOutputParser.swift */,
 				85CBBFA92954CD8E00E3C634 /* Assets.xcassets */,
@@ -96,12 +130,16 @@
 				85CBBF9E2954CD8D00E3C634 /* Sources */,
 				85CBBF9F2954CD8D00E3C634 /* Frameworks */,
 				85CBBFA02954CD8D00E3C634 /* Resources */,
+				8504379D2958E01700F9424C /* Embed Libraries */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Screens;
+			packageProductDependencies = (
+				850437952958DCF400F9424C /* Shout */,
+			);
 			productName = Screens;
 			productReference = 85CBBFA22954CD8D00E3C634 /* Screens.app */;
 			productType = "com.apple.product-type.application";
@@ -130,6 +168,9 @@
 				Base,
 			);
 			mainGroup = 85CBBF992954CD8D00E3C634;
+			packageReferences = (
+				850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */,
+			);
 			productRefGroup = 85CBBFA32954CD8D00E3C634 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -163,6 +204,7 @@
 				85CBBFB72954D35A00E3C634 /* ScreenOutputParser.swift in Sources */,
 				85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */,
 				85CBBFA62954CD8D00E3C634 /* ScreensApp.swift in Sources */,
+				850437982958DCFD00F9424C /* SSHScreenSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +406,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jakeheis/Shout";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.5.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		850437952958DCF400F9424C /* Shout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */;
+			productName = Shout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 85CBBF9A2954CD8D00E3C634 /* Project object */;
 }
