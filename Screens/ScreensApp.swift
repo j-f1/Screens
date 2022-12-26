@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct ScreensApp: App {
+    @State var models: [ViewModel] = [
+        ViewModel(source: LocalScreenSource()),
+        ViewModel(source: SSHScreenSource(username: "jed", host: "mini")),
+    ]
     var body: some Scene {
 //        MenuBarExtra {
 //            ContentView()
@@ -17,7 +21,11 @@ struct ScreensApp: App {
 //        }
 
         WindowGroup {
-            ContentView()
+            ContentView(models: models)
+        }
+        
+        Settings {
+            SettingsView(models: $models)
         }
     }
 }

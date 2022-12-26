@@ -7,6 +7,7 @@
 
 import Foundation
 import Shout
+import SwiftUI
 
 final class SSHScreenSource: ScreenSource {
     internal init(screenCommand: String = "screen", username: String, host: String, port: Int32 = 22) {
@@ -31,6 +32,10 @@ final class SSHScreenSource: ScreenSource {
     let username: String
     let host: String
     let port: Int32
+    
+    var title: LocalizedStringKey {
+        "SSH: \(username)@\(host + (port == 22 ? "" : ":\(port)"))"
+    }
 
     private var connection: SSH?
     private func currentConnection() throws -> SSH {

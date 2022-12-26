@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class LocalScreenSource: ScreenSource {
     init(screenCommand: String = "screen") {
@@ -13,6 +14,7 @@ class LocalScreenSource: ScreenSource {
     }
     
     let screenCommand: String
+    let title: LocalizedStringKey = "Local"
 
     func update() async throws -> [Screen] {
         try await withCheckedThrowingContinuation { continuation in
@@ -26,7 +28,7 @@ class LocalScreenSource: ScreenSource {
                     do {
                         try pipe.fileHandleForWriting.close()
                         let data = pipe.fileHandleForReading.availableData
-                        if proc.terminationStatus != 1 {
+                        if ![0, 1].contains(proc.terminationStatus) {
                             throw ScreenError.exit(status: proc.terminationStatus, output: data)
                         }
                         if let string = String(data: data, encoding: .utf8),

@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol ScreenSource: AnyObject, Hashable {
     func update() async throws -> [Screen]
     func command(for screen: Screen) -> String
     var screenCommand: String { get }
+    var title: LocalizedStringKey { get }
 }
 
 class AnyScreenSource: ScreenSource {
@@ -60,6 +62,15 @@ class AnyScreenSource: ScreenSource {
             return local.screenCommand
         case .ssh(let ssh):
             return ssh.screenCommand
+        }
+    }
+    
+    var title: LocalizedStringKey {
+        switch wrapped {
+        case .local(let local):
+            return local.title
+        case .ssh(let ssh):
+            return ssh.title
         }
     }
 }

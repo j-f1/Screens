@@ -7,14 +7,15 @@
 
 import Foundation
 
-class ViewModel<Source: ScreenSource>: ObservableObject {
+class ViewModel: ObservableObject, Identifiable {
     private var timer: Timer?
     
-    let source: Source
+    @Published var source: AnyScreenSource
     @Published var screens = [Screen]()
+    @Published var error: Error?
 
-    init(source: Source) {
-        self.source = source
+    init(source: some ScreenSource) {
+        self.source = AnyScreenSource(source)
 
         let timer = Timer(fire: .now, interval: 1, repeats: true) { [weak self] _ in
             self?.update()
@@ -29,9 +30,12 @@ class ViewModel<Source: ScreenSource>: ObservableObject {
                 let screens = try await source.update()
                 await MainActor.run {
                     self.screens = screens
+                    self.error = nil
                 }
             } catch {
-                print(error)
+                await MainActor.run {
+                    self.error = error
+                }
             }
         }
     }

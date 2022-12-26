@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var localModel = ViewModel(source: LocalScreenSource())
-    @StateObject var sshModel = ViewModel(source: SSHScreenSource(username: "jed", host: "mini"))
+    let models: [ViewModel]
 
     var body: some View {
         Menu("Click Me") {
-            Section("Local") {
-                ForEach(localModel.screens) { screen in
-                    ScreenButton(screen: screen)
-                }
-            }
-            Section("SSH: jed@mini") {
-                ForEach(sshModel.screens) { screen in
-                    ScreenButton(screen: screen)
-                }
+            ForEach(models) { model in
+                ModelSection(model: model)
             }
         }
         .padding()
+    }
+}
+
+struct ModelSection: View {
+    @ObservedObject var model: ViewModel
+    var body: some View {
+        Section(model.source.title) {
+            ForEach(model.screens) { screen in
+                ScreenButton(screen: screen)
+            }
+        }
     }
 }
 
@@ -57,6 +60,6 @@ struct ScreenButton: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(models: [.init(source: LocalScreenSource())])
     }
 }
