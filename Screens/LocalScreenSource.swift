@@ -8,14 +8,17 @@
 import Foundation
 
 class LocalScreenSource: ScreenSource {
-    var shell = "/opt/homebrew/bin/fish"
-    var screenCommand = "screen"
+    init(screenCommand: String = "screen") {
+        self.screenCommand = screenCommand
+    }
     
+    let screenCommand: String
+
     func update() async throws -> [Screen] {
         try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global().async { [self] in
                 let proc = Process()
-                proc.executableURL = URL(fileURLWithPath: shell)
+                proc.executableURL = URL(fileURLWithPath: "/bin/zsh")
                 proc.arguments = ["-c", "\(screenCommand) -list"]
                 let pipe = Pipe()
                 proc.standardOutput = pipe.fileHandleForWriting
@@ -56,10 +59,9 @@ class LocalScreenSource: ScreenSource {
     }
     
     static func == (lhs: LocalScreenSource, rhs: LocalScreenSource) -> Bool {
-        lhs.shell == rhs.shell && lhs.screenCommand == rhs.screenCommand
+        lhs.screenCommand == rhs.screenCommand
     }
     func hash(into hasher: inout Hasher) {
-        hasher.combine(shell)
         hasher.combine(screenCommand)
     }
 }
