@@ -237,6 +237,13 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		859D26322959D5F4007EDBBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 859D26312959D5F4007EDBBE /* Shout */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		85CBBFAF2954CD8E00E3C634 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -459,6 +466,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		850437952958DCF400F9424C /* Shout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */;
+			productName = Shout;
+		};
+		859D26312959D5F4007EDBBE /* Shout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */;
 			productName = Shout;
