@@ -43,7 +43,7 @@ final class SSHScreenSource: ScreenSource {
             return connection
         }
         let connection = try SSH(host: host, port: port)
-        try connection.authenticate(username: username, authMethod: SSHKey(privateKey: "/Users/\(NSUserName())/.ssh/id_ed25519"))
+        try connection.authenticate(username: username, authMethod: SSHKey(privateKey: "/Users/\(NSUserName())/.ssh/id_ed25519", passphrase: ""))
         self.connection = connection
         return connection
     }
