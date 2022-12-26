@@ -15,37 +15,37 @@ protocol ScreenSource: AnyObject, Hashable {
 class AnyScreenSource: ScreenSource {
     init(_ source: some ScreenSource) {
         if let source = source as? AnyScreenSource {
-            value = source.value
+            wrapped = source.wrapped
         } else if let source = source as? LocalScreenSource {
-            value = .local(source)
+            wrapped = .local(source)
         } else if let source = source as? SSHScreenSource {
-            value = .ssh(source)
+            wrapped = .ssh(source)
         } else {
             fatalError("Invalid ScreenSource type \(Self.self)")
         }
     }
-    private let value: Value
-    private enum Value: Hashable {
+    let wrapped: Wrapped
+    enum Wrapped: Hashable {
         case local(LocalScreenSource)
         case ssh(SSHScreenSource)
     }
     
     static func == (lhs: AnyScreenSource, rhs: AnyScreenSource) -> Bool {
-        lhs.value == rhs.value
+        lhs.wrapped == rhs.wrapped
     }
     func hash(into hasher: inout Hasher) {
-        hasher.combine(value)
+        hasher.combine(wrapped)
     }
 
     func update() async throws -> [Screen] {
-        switch value {
+        switch wrapped {
         case .local(let local): return try await local.update()
         case .ssh(let ssh): return try await ssh.update()
         }
     }
     
     func command(for screen: Screen) -> String {
-        switch value {
+        switch wrapped {
         case .local(let local):
             return local.command(for: screen)
         case .ssh(let ssh):
