@@ -31,11 +31,7 @@ final class SSHScreenSource: ScreenSource {
     let username: String
     let host: String
     let port: Int32
-    
-    private enum Error: Swift.Error {
-        case exit(status: Int32, output: String)
-    }
-    
+
     private var connection: SSH?
     private func currentConnection() throws -> SSH {
         if let connection {
@@ -65,20 +61,12 @@ final class SSHScreenSource: ScreenSource {
     private func readScreens(from connection: SSH) throws -> [Screen] {
         let (status, output) = try connection.capture("\(screenCommand) -list")
         if status != 1 {
-            throw Error.exit(status: status, output: output)
+            throw ScreenError.exit(status: status, output: output)
         }
-        return .init(source: self, screenOutput: output)
-    }
-    
-}
-
-extension SSH: Hashable, Equatable {
-    public static func == (lhs: Shout.SSH, rhs: Shout.SSH) -> Bool {
-        lhs === rhs
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
+        if let screens = [Screen](source: self, screenOutput: output) {
+            return screens
+        }
+        throw ScreenError.invalidContent(output)
     }
     
 }

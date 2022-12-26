@@ -50,9 +50,11 @@ struct Screen: Identifiable {
 }
 
 extension [Screen] {
-    init(source: some ScreenSource, screenOutput: String) {
-        self = screenOutput
-            .split(separator: "\r\n")[1]
+    init?(source: some ScreenSource, screenOutput: String) {
+        let sections = screenOutput
+            .split(separator: "\r\n")
+        guard let content = sections.dropFirst().first else { return nil }
+        self = content
             .split(separator: "\n")
             .dropLast()
             .map { $0.dropFirst().split(separator: "\t") }

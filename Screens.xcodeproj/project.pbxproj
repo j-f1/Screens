@@ -19,6 +19,7 @@
 		856F94E82958E99600DEE579 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		856F94E92958E99C00DEE579 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */; };
 		856F94EA2958E99C00DEE579 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		859D26342959E7C2007EDBBE /* ScreenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859D26332959E7C2007EDBBE /* ScreenError.swift */; };
 		85CBBFA62954CD8D00E3C634 /* ScreensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */; };
 		85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBBFA72954CD8D00E3C634 /* ContentView.swift */; };
 		85CBBFAA2954CD8E00E3C634 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85CBBFA92954CD8E00E3C634 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		850437B62958E2A800F9424C /* libssh2.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh2.1.dylib; path = ../../../../../opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.1.dylib; sourceTree = "<group>"; };
 		856F94E22958E94F00DEE579 /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = "../../../../../opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libssl.1.1.dylib"; sourceTree = "<group>"; };
 		856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = "/opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libcrypto.1.1.dylib"; sourceTree = "<absolute>"; };
+		859D26332959E7C2007EDBBE /* ScreenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenError.swift; sourceTree = "<group>"; };
 		85CBBFA22954CD8D00E3C634 /* Screens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensApp.swift; sourceTree = "<group>"; };
 		85CBBFA72954CD8D00E3C634 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				850437902958D3F300F9424C /* ScreenSource.swift */,
 				850437922958D40E00F9424C /* LocalScreenSource.swift */,
 				850437972958DCFD00F9424C /* SSHScreenSource.swift */,
+				859D26332959E7C2007EDBBE /* ScreenError.swift */,
 				8504378E2958D34000F9424C /* Screen.swift */,
 				85CBBFB62954D35A00E3C634 /* ScreenOutputParser.swift */,
 				85CBBFA92954CD8E00E3C634 /* Assets.xcassets */,
@@ -224,6 +227,7 @@
 				8504378F2958D34000F9424C /* Screen.swift in Sources */,
 				85CBBFB52954CDE500E3C634 /* ViewModel.swift in Sources */,
 				850437932958D40E00F9424C /* LocalScreenSource.swift in Sources */,
+				859D26342959E7C2007EDBBE /* ScreenError.swift in Sources */,
 				85CBBFB72954D35A00E3C634 /* ScreenOutputParser.swift in Sources */,
 				85CBBFA82954CD8D00E3C634 /* ContentView.swift in Sources */,
 				85CBBFA62954CD8D00E3C634 /* ScreensApp.swift in Sources */,

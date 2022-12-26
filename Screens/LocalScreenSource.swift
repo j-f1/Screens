@@ -22,22 +22,30 @@ class LocalScreenSource: ScreenSource {
                 proc.terminationHandler = { proc in
                     do {
                         try pipe.fileHandleForWriting.close()
-                        if let string = String(data: pipe.fileHandleForReading.availableData, encoding: .utf8) {
-                            let screens = [Screen](source: self, screenOutput: string)
+                        let data = pipe.fileHandleForReading.availableData
+                        if proc.terminationStatus != 1 {
+                            throw ScreenError.exit(status: proc.terminationStatus, output: data)
+                        }
+                        if let string = String(data: data, encoding: .utf8),
+                           let screens = [Screen](source: self, screenOutput: string) {
                             DispatchQueue.main.async {
                                 continuation.resume(returning: screens)
                             }
                         } else {
-                            print("Invalid data: \(pipe.fileHandleForReading.availableData)")
+                            throw ScreenError.invalidContent(data)
                         }
                     } catch {
-                        continuation.resume(throwing: error)
+                        DispatchQueue.main.async {
+                            continuation.resume(throwing: error)
+                        }
                     }
                 }
                 do {
                     try proc.run()
                 } catch {
-                    continuation.resume(throwing: error)
+                    DispatchQueue.main.async {
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
         }
