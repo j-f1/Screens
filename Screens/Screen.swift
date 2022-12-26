@@ -30,7 +30,7 @@ struct Screen: Identifiable {
     }
 
     var baseCommand: String {
-        "screen -r \(pid)"
+        "\(source.screenCommand) -r \(pid)"
     }
     
     fileprivate init?(source: some ScreenSource, name: some StringProtocol, status: some StringProtocol) {

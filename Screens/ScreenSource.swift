@@ -10,6 +10,7 @@ import Foundation
 protocol ScreenSource: AnyObject, Hashable {
     func update() async throws -> [Screen]
     func command(for screen: Screen) -> String
+    var screenCommand: String { get }
 }
 
 class AnyScreenSource: ScreenSource {
@@ -50,6 +51,15 @@ class AnyScreenSource: ScreenSource {
             return local.command(for: screen)
         case .ssh(let ssh):
             return ssh.command(for: screen)
+        }
+    }
+    
+    var screenCommand: String {
+        switch wrapped {
+        case .local(let local):
+            return local.screenCommand
+        case .ssh(let ssh):
+            return ssh.screenCommand
         }
     }
 }
