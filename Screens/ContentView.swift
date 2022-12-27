@@ -24,6 +24,9 @@ struct ModelSection: View {
     @ObservedObject var model: ViewModel
     var body: some View {
         Section(model.source.title) {
+            if model.screens.isEmpty {
+                Text("No Active Screens")
+            }
             ForEach(model.screens) { screen in
                 ScreenButton(screen: screen)
             }
