@@ -9,7 +9,7 @@ import SwiftUI
 import Introspect
 
 struct SettingsView: View {
-    @Binding var sources: [SourceObserver]
+    @Binding var config: Config
     
     @State private var tab = Tab.sources
     private enum Tab {
@@ -21,14 +21,14 @@ struct SettingsView: View {
         NavigationSplitView {
             List(selection: $tab) {
                 SettingsTabLabel("Sources", icon: "eye.fill", color: .indigo)
-                    .badge(sources.count)
+                    .badge(config.sources.count)
                     .tag(Tab.sources)
                 SettingsTabLabel("Behavior", icon: "gearshape.fill", color: .purple)
                     .tag(Tab.behavior)
             }
             .navigationSplitViewColumnWidth(145)
         } detail: {
-            Content(tab: tab, sources: $sources)
+            Content(tab: tab, config: $config)
                 .formStyle(.grouped)
                 .navigationSplitViewColumnWidth(355)
         }
@@ -37,14 +37,14 @@ struct SettingsView: View {
     
     private struct Content: View {
         let tab: Tab
-        @Binding var sources: [SourceObserver]
+        @Binding var config: Config
 
         var body: some View {
             switch tab {
             case .sources:
-                SourcesSettings(sources: $sources)
+                SourcesSettings(sources: $config.sources)
             case .behavior:
-                BehaviorSettings()
+                BehaviorSettings(options: $config.options)
             }
         }
     }
@@ -52,6 +52,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(sources: .constant([]))
+        SettingsView(config: .constant(Config()))
     }
 }

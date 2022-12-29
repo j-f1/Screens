@@ -20,7 +20,7 @@ struct ContentView: View {
 struct ModelSection: View {
     @ObservedObject var model: SourceObserver
 
-    @AppStorage("hideEmpty") private var hideEmpty = false
+    @Environment(\.options) private var options
 
     var body: some View {
         if model.error != nil {
@@ -28,7 +28,7 @@ struct ModelSection: View {
                 Text("Open Settings to debug")
             }
         } else if model.screens.isEmpty {
-            if !hideEmpty {
+            if !options.hideEmpty {
                 Section("\(model.title) — No Active Screens") {}
             }
         } else {

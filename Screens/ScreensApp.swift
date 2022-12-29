@@ -8,45 +8,15 @@
 import SwiftUI
 import Combine
 
-let configURL = URL.homeDirectory
-    .appendingPathComponent(".config")
-    .appendingPathComponent("com.jedfox.screens", conformingTo: .json)
-
-struct Config: Codable {
-    let sources: [SourceObserver]
-}
-
 @main
 struct ScreensApp: App {
-    @State private var sources: [SourceObserver] = {
-        do {
-            return try JSONDecoder().decode(Config.self, from: try Data(contentsOf: configURL)).sources
-        } catch {
-            print(error)
-            return []
-        }
-    }()
+    @State private var config = Config.load()
     @Environment(\.openWindow) private var openWindow
 
-    @State private var encoder: JSONEncoder = {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
-        return encoder
-    }()
-    
-    func save() {
-        do {
-            let data = try encoder.encode(Config(sources: sources))
-            try FileManager.default.createDirectory(at: configURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-            try data.write(to: configURL)
-        } catch {
-            print(error)
-        }
-    }
-    
     var body: some Scene {
         MenuBarExtra {
-            ContentView(sources: sources)
+            ContentView(sources: config.sources)
+                .environment(\.options, config.options)
 
             Button("Settings…") {
                 NSApp.activate(ignoringOtherApps: true)
@@ -61,9 +31,10 @@ struct ScreensApp: App {
         }
 
         Window("Screens Settings", id: "Settings") {
-            SettingsView(sources: $sources)
+            SettingsView(config: $config)
+                .environment(\.options, config.options)
                 .frame(minWidth: 510)
-                .onDisappear(perform: save)
+                .onDisappear(perform: config.save)
         }
         .windowToolbarStyle(.unifiedCompact)
         .windowResizability(.contentSize)
