@@ -13,9 +13,14 @@ struct ScreensApp: App {
         ViewModel(source: LocalScreenSource()),
         ViewModel(source: SSHScreenSource(username: "jed", host: "mini")),
     ]
+    @Environment(\.openWindow) var openWindow
     var body: some Scene {
         MenuBarExtra {
             ContentView(models: models)
+            Button("Settings…") {
+                NSApp.activate(ignoringOtherApps: true)
+                openWindow(id: "Settings")
+            }.keyboardShortcut(",")
         } label: {
             Image(systemName: "terminal")
         }
@@ -24,8 +29,8 @@ struct ScreensApp: App {
             ContentView(models: models)
         }
         
-        Settings {
+        Window("Screens Settings", id: "Settings") {
             SettingsView(models: $models)
-        }
+        }.windowResizability(.contentSize)
     }
 }

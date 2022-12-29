@@ -31,7 +31,7 @@ enum ScreenError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .exit(let status, let output):
-            return "Screen command exited with unexpected status \(status). Output:\n\(output)"
+            return "Screen command exited with unexpected status \(status).\n\(output)"
         case .invalidContent(let content):
             return "Unable to parse output from screen command:\n\(content)"
         }

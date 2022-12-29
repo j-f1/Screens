@@ -14,7 +14,7 @@ class LocalScreenSource: ScreenSource {
     }
     
     let screenCommand: String
-    let title: LocalizedStringKey = "Local"
+    let title = "Local"
 
     func update() async throws -> [Screen] {
         try await withCheckedThrowingContinuation { continuation in

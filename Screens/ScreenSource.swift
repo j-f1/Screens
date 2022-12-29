@@ -12,7 +12,7 @@ protocol ScreenSource: AnyObject, Hashable {
     func update() async throws -> [Screen]
     func command(for screen: Screen) -> String
     var screenCommand: String { get }
-    var title: LocalizedStringKey { get }
+    var title: String { get }
 }
 
 class AnyScreenSource: ScreenSource {
@@ -65,7 +65,7 @@ class AnyScreenSource: ScreenSource {
         }
     }
     
-    var title: LocalizedStringKey {
+    var title: String {
         switch wrapped {
         case .local(let local):
             return local.title

@@ -31,9 +31,9 @@ struct LocalSourceConfiguration: View {
     let onDelete: () -> Void
 
     var body: some View {
-        SourceContainer {
-            SourceTitle(title: model.source.title, onDelete: onDelete)
-            LabeledTextField(label: "Command", placeholder: "screen", text: Binding { source.screenCommand } set: { source = .init(screenCommand: $0) })
+        SourceContainer(model: model, onDelete: onDelete) {
+            LabeledContent("Type", value: "Local")
+            LabeledTextField(label: "Command", text: Binding { source.screenCommand } set: { source = .init(screenCommand: $0) })
             StatusDisplay(model: model)
         }
     }
@@ -45,20 +45,18 @@ struct SSHSourceConfiguration: View {
     let onDelete: () -> Void
 
     var body: some View {
-        SourceContainer {
-            SourceTitle(title: model.source.title, onDelete: onDelete)
-            HStack {
-                LabeledTextField(label: "Username", placeholder: "\(NSUserName())", text: Binding { source.username } set: {
-                    source = .init(screenCommand: source.screenCommand, username: $0, host: source.host, port: source.port)
-                })
-                LabeledTextField(label: "Host", placeholder: "", text: Binding { source.host } set: {
-                    source = .init(screenCommand: source.screenCommand, username: source.username, host: $0, port: source.port)
-                })
-//                LabeledTextField(label: "Port", placeholder: "22", text: Binding { source.username } set: {
-//                    source = .init(screenCommand: source.screenCommand, username: $0, host: source.username, port: source.port)
-//                })
-            }
-            LabeledTextField(label: "Command", placeholder: "screen", text: Binding { source.screenCommand } set: {
+        SourceContainer(model: model, onDelete: onDelete) {
+            LabeledContent("Type", value: "SSH")
+            LabeledTextField(label: "Username", text: Binding { source.username } set: {
+                source = .init(screenCommand: source.screenCommand, username: $0, host: source.host, port: source.port)
+            })
+            LabeledTextField(label: "Host", text: Binding { source.host } set: {
+                source = .init(screenCommand: source.screenCommand, username: source.username, host: $0, port: source.port)
+            })
+//            LabeledTextField(label: "Port", text: Binding { source.username } set: {
+//                source = .init(screenCommand: source.screenCommand, username: $0, host: source.username, port: source.port)
+//            })
+            LabeledTextField(label: "Command", text: Binding { source.screenCommand } set: {
                 source = .init(screenCommand: $0, username: source.username, host: source.host, port: source.port)
             })
             StatusDisplay(model: model)
@@ -67,44 +65,69 @@ struct SSHSourceConfiguration: View {
 }
 
 struct SourceContainer<Content: View>: View {
-    internal init(@ViewBuilder content: @escaping () -> Content) {
+    internal init(model: ViewModel, onDelete: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
+        self.model = model
+        self.onDelete = onDelete
         self.content = content
     }
     
+    let model: ViewModel
+    let onDelete: () -> Void
     let content: () -> Content
+
     var body: some View {
-        GroupBox {
-            VStack(alignment: .leading, spacing: 8, content: content)
-                .padding(8)
-        }
+        Section(content: content, header: {
+            SourceTitle(model: model, onDelete: onDelete)
+        })
+//        GroupBox {
+//            VStack(alignment: .leading, spacing: 8, content: content)
+//                .padding(8)
+//        }
     }
 }
 
 struct SourceTitle: View {
-    let title: LocalizedStringKey
+    @ObservedObject var model: ViewModel
     let onDelete: () -> Void
-    
+    @State private var isEditing = false
+    @FocusState var textFieldFocused
+
     var body: some View {
         HStack {
-            Text(title).font(.headline)
+            if isEditing {
+                TextField("Custom Title", text: $model.customTitle, prompt: Text(model.source.title))
+                    .labelsHidden()
+                    .textFieldStyle(.plain)
+                    .font(.headline)
+                    .focused($textFieldFocused)
+                    .onAppear {
+                        textFieldFocused = true
+                    }
+                    .onSubmit {
+                        isEditing = false
+                    }
+            } else {
+                Text(model.title)
+                    .onTapGesture(count: 2) {
+                        isEditing = true
+                    }
+            }
             Spacer()
             Button("Delete", action: onDelete)
                 .controlSize(.small)
+                .font(.caption)
         }
     }
 }
 
 struct LabeledTextField: View {
     let label: LocalizedStringKey
-    let placeholder: LocalizedStringKey
     @Binding var text: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            TextField(placeholder, text: $text).font(.body.monospaced())
-            Text(label).font(.caption)
-        }
-
+        TextField(text: $text) {
+            Text(label).font(.body)
+        }.font(.body.monospaced())
     }
 }
 
@@ -119,9 +142,20 @@ struct StatusDisplay: View {
                 }
                 return desc
             }(error.localizedDescription)
-            Text(desc)
-                .foregroundColor(.red)
-                .fixedSize(horizontal: false, vertical: true)
+            let splits = desc.split(separator: "\n", maxSplits: 1)
+            VStack(alignment: .leading, spacing: 8) {
+                Label(splits.first!, systemImage: "exclamationmark.octagon.fill")
+                    .foregroundColor(.red)
+                if splits.count > 1 {
+                    Text(splits[1])
+                        .monospaced()
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }.textSelection(.enabled)
+        } else if model.screens.isEmpty {
+            Label("No active screens", systemImage: "info")
+                .foregroundColor(.secondary)
+                .font(.callout)
         } else {
             Label("Active screens: \(model.screens.count)", systemImage: "checkmark")
                 .foregroundColor(.green)

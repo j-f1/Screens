@@ -33,7 +33,7 @@ final class SSHScreenSource: ScreenSource {
     let host: String
     let port: Int32
     
-    var title: LocalizedStringKey {
+    var title: String {
         "SSH: \(username)@\(host + (port == 22 ? "" : ":\(port)"))"
     }
 

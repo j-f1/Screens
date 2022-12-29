@@ -6,11 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ViewModel: ObservableObject, Identifiable {
     private var timer: Timer?
     
     @Published var source: AnyScreenSource
+    @Published var customTitle: String = ""
+    var title: String {
+        customTitle.isEmpty ? source.title : customTitle
+    }
     @Published var screens = [Screen]()
     @Published var error: Error?
 
