@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  SourceObserver.swift
 //  Screens
 //
 //  Created by Jed Fox on 2022-12-22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class ViewModel: ObservableObject, Identifiable {
+class SourceObserver: ObservableObject, Identifiable {
     private var timer: Timer?
     
     @Published var source: AnyScreenSource

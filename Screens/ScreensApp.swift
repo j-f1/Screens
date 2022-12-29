@@ -9,14 +9,14 @@ import SwiftUI
 
 @main
 struct ScreensApp: App {
-    @State var models: [ViewModel] = [
-        ViewModel(source: LocalScreenSource()),
-        ViewModel(source: SSHScreenSource(username: "jed", host: "mini")),
+    @State var sources: [SourceObserver] = [
+        SourceObserver(source: LocalScreenSource()),
+        SourceObserver(source: SSHScreenSource(username: "jed", host: "mini")),
     ]
     @Environment(\.openWindow) var openWindow
     var body: some Scene {
         MenuBarExtra {
-            ContentView(models: models)
+            ContentView(sources: sources)
             Button("Settings…") {
                 NSApp.activate(ignoringOtherApps: true)
                 openWindow(id: "Settings")
@@ -28,12 +28,8 @@ struct ScreensApp: App {
             Image(systemName: "terminal")
         }
 
-        WindowGroup {
-            ContentView(models: models)
-        }
-        
         Window("Screens Settings", id: "Settings") {
-            SettingsView(models: $models)
+            SettingsView(sources: $sources)
         }
         .windowToolbarStyle(.unifiedCompact)
         .windowResizability(.contentSize)

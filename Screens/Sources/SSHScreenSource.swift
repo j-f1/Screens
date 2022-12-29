@@ -17,17 +17,6 @@ final class SSHScreenSource: ScreenSource {
         self.port = port
     }
 
-    public static func == (lhs: SSHScreenSource, rhs: SSHScreenSource) -> Bool {
-        lhs === rhs
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(screenCommand)
-        hasher.combine(username)
-        hasher.combine(host)
-        hasher.combine(port)
-    }
-
     let screenCommand: String
     let username: String
     let host: String
@@ -74,4 +63,14 @@ final class SSHScreenSource: ScreenSource {
         throw ScreenError.invalidContent(output)
     }
     
+    public static func == (lhs: SSHScreenSource, rhs: SSHScreenSource) -> Bool {
+        lhs === rhs
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(screenCommand)
+        hasher.combine(username)
+        hasher.combine(host)
+        hasher.combine(port)
+    }
 }

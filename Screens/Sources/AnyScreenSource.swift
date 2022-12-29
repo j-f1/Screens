@@ -1,19 +1,11 @@
 //
-//  ScreenSource.swift
+//  AnyScreenSource.swift
 //  Screens
 //
 //  Created by Jed Fox on 2022-12-25.
 //
 
 import Foundation
-import SwiftUI
-
-protocol ScreenSource: AnyObject, Hashable {
-    func update() async throws -> [Screen]
-    func command(for screen: Screen) -> String
-    var screenCommand: String { get }
-    var title: String { get }
-}
 
 class AnyScreenSource: ScreenSource {
     init(_ source: some ScreenSource) {
@@ -33,13 +25,6 @@ class AnyScreenSource: ScreenSource {
         case ssh(SSHScreenSource)
     }
     
-    static func == (lhs: AnyScreenSource, rhs: AnyScreenSource) -> Bool {
-        lhs.wrapped == rhs.wrapped
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(wrapped)
-    }
-
     func update() async throws -> [Screen] {
         switch wrapped {
         case .local(let local): return try await local.update()
@@ -72,5 +57,12 @@ class AnyScreenSource: ScreenSource {
         case .ssh(let ssh):
             return ssh.title
         }
+    }
+    
+    static func == (lhs: AnyScreenSource, rhs: AnyScreenSource) -> Bool {
+        lhs.wrapped == rhs.wrapped
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(wrapped)
     }
 }

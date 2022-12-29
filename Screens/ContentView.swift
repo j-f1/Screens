@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    let models: [ViewModel]
+    let sources: [SourceObserver]
 
     var body: some View {
-        ForEach(models) { model in
+        ForEach(sources) { model in
             ModelSection(model: model)
         }
     }
 }
 
 struct ModelSection: View {
-    @ObservedObject var model: ViewModel
+    @ObservedObject var model: SourceObserver
     var body: some View {
         if model.screens.isEmpty {
             Section("\(model.title) — No Active Screens") {}
@@ -61,6 +61,6 @@ struct ScreenButton: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(models: [.init(source: LocalScreenSource())])
+        ContentView(sources: [.init(source: LocalScreenSource())])
     }
 }

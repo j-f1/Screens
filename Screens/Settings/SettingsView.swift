@@ -9,7 +9,7 @@ import SwiftUI
 import Introspect
 
 struct SettingsView: View {
-    @Binding var models: [ViewModel]
+    @Binding var sources: [SourceObserver]
     
     @State private var tab = Tab.sources
     private enum Tab {
@@ -41,14 +41,14 @@ struct SettingsView: View {
         NavigationSplitView {
             List(selection: $tab) {
                 Label(title: "Sources", icon: "tray.2", color: .gray)
-                    .badge(models.count)
+                    .badge(sources.count)
                     .tag(Tab.sources)
                 Label(title: "Behavior", icon: "mail.and.text.magnifyingglass", color: .purple)
                     .tag(Tab.behavior)
             }
             .navigationSplitViewColumnWidth(145)
         } detail: {
-            Content(tab: tab, models: $models)
+            Content(tab: tab, sources: $sources)
                 .formStyle(.grouped)
                 .navigationSplitViewColumnWidth(355)
         }
@@ -57,24 +57,24 @@ struct SettingsView: View {
     
     private struct Content: View {
         let tab: Tab
-        @Binding var models: [ViewModel]
+        @Binding var sources: [SourceObserver]
 
         var body: some View {
             switch tab {
             case .sources:
                 Form {
-                    ForEach(models) { model in
+                    ForEach(sources) { model in
                         SourceConfiguration(model: model, onDelete: {
-                            models = models.filter { $0.source != model.source }
+                            sources = sources.filter { $0.source != model.source }
                         })
                     }
                 }.toolbar {
                     Menu {
                         Button("Local") {
-                            models.append(ViewModel(source: LocalScreenSource()))
+                            sources.append(SourceObserver(source: LocalScreenSource()))
                         }
                         Button("SSH") {
-                            models.append(ViewModel(source: SSHScreenSource(username: "", host: "")))
+                            sources.append(SourceObserver(source: SSHScreenSource(username: "", host: "")))
                         }
                     } label: {
                         SwiftUI.Label("Add Source", systemImage: "plus")
@@ -89,6 +89,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(models: .constant([]))
+        SettingsView(sources: .constant([]))
     }
 }
