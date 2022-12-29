@@ -20,12 +20,13 @@ struct ContentView: View {
 struct ModelSection: View {
     @ObservedObject var model: ViewModel
     var body: some View {
-        Section(model.title) {
-            if model.screens.isEmpty {
-                Text("No Active Screens")
-            }
-            ForEach(model.screens) { screen in
-                ScreenButton(screen: screen)
+        if model.screens.isEmpty {
+            Section("\(model.title) — No Active Screens") {}
+        } else {
+            Section(model.title) {
+                ForEach(model.screens) { screen in
+                    ScreenButton(screen: screen)
+                }
             }
         }
     }
