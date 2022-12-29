@@ -13,7 +13,7 @@ struct SourcesSettings: View {
         Form {
             ForEach(sources) { model in
                 SourceConfiguration(model: model, onDelete: {
-                    sources = sources.filter { $0.source != model.source }
+                    sources = sources.filter { $0 !== model }
                 })
             }
             Section { } footer: {
