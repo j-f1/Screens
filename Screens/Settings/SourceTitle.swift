@@ -12,6 +12,7 @@ struct SourceTitle: View {
     let originalTitle: String
     
     @State private var isEditing = false
+    @State private var oldTitle = ""
     @FocusState private var textFieldFocused
     
     var body: some View {
@@ -23,9 +24,24 @@ struct SourceTitle: View {
                 .focused($textFieldFocused)
                 .onAppear { textFieldFocused = true }
                 .onSubmit { isEditing = false }
+                .background(alignment: .trailing) {
+                    Button("Cancel") {
+                        isEditing = false
+                        customTitle = oldTitle
+                    }
+                        .keyboardShortcut(.escape, modifiers: [])
+                        .opacity(0)
+                        .allowsHitTesting(false)
+                }
+                .onChange(of: textFieldFocused) { newValue in
+                    if !newValue {
+                        isEditing = false
+                    }
+                }
         } else {
             Text(customTitle.isEmpty ? originalTitle : customTitle)
                 .onTapGesture(count: 2) {
+                    oldTitle = customTitle
                     isEditing = true
                 }
         }

@@ -16,6 +16,13 @@ struct SourcesSettings: View {
                     sources = sources.filter { $0.source != model.source }
                 })
             }
+            Section { } footer: {
+                Text("Double-click a source name to rename it.\nClick \(Image(systemName: "plus")) above to add a new source.")
+                    .imageScale(.small)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }.toolbar {
             Menu {
                 Button("Local") {
