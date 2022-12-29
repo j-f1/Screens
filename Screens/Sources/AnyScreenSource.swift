@@ -7,8 +7,8 @@
 
 import Foundation
 
-class AnyScreenSource: ScreenSource {
-    init(_ source: some ScreenSource) {
+final class AnyScreenSource: ScreenSource {
+    init(_ source: any ScreenSource) {
         if let source = source as? AnyScreenSource {
             wrapped = source.wrapped
         } else if let source = source as? LocalScreenSource {
@@ -19,46 +19,70 @@ class AnyScreenSource: ScreenSource {
             fatalError("Invalid ScreenSource type \(Self.self)")
         }
     }
+
     let wrapped: Wrapped
     enum Wrapped: Hashable {
         case local(LocalScreenSource)
         case ssh(SSHScreenSource)
+
+        var type: WrappedType {
+            switch self {
+            case .local: return .local
+            case .ssh: return .ssh
+            }
+        }
+        var value: any ScreenSource {
+            switch self {
+            case .local(let source): return source
+            case .ssh(let source): return source
+            }
+        }
     }
-    
+    enum WrappedType: String, Codable {
+        case local
+        case ssh
+        
+        var type: any ScreenSource.Type {
+            switch self {
+            case .local: return LocalScreenSource.self
+            case .ssh: return SSHScreenSource.self
+            }
+        }
+    }
+
+    // MARK: ScreenSource
+
     func update() async throws -> [Screen] {
-        switch wrapped {
-        case .local(let local): return try await local.update()
-        case .ssh(let ssh): return try await ssh.update()
-        }
+        try await wrapped.value.update()
     }
-    
     func command(for screen: Screen) -> String {
-        switch wrapped {
-        case .local(let local):
-            return local.command(for: screen)
-        case .ssh(let ssh):
-            return ssh.command(for: screen)
-        }
+        wrapped.value.command(for: screen)
     }
-    
     var screenCommand: String {
-        switch wrapped {
-        case .local(let local):
-            return local.screenCommand
-        case .ssh(let ssh):
-            return ssh.screenCommand
-        }
+        wrapped.value.screenCommand
     }
-    
     var title: String {
-        switch wrapped {
-        case .local(let local):
-            return local.title
-        case .ssh(let ssh):
-            return ssh.title
-        }
+        wrapped.value.title
+    }
+
+    // MARK: (non) Codable
+
+    init(from decoder: Decoder) throws {
+        throw DecodingError.dataCorrupted(.init(
+            codingPath: decoder.codingPath,
+            debugDescription: "Cannot explicitly decode an AnyScreenSource"
+        ))
     }
     
+    func encode(to encoder: Encoder) throws {
+        throw EncodingError.invalidValue(self, .init(
+            codingPath: encoder.codingPath,
+            debugDescription: "Cannot explicitly encode an AnyScreenSource"
+        ))
+    }
+
+    // MARK: Hashable/Equatable
+
     static func == (lhs: AnyScreenSource, rhs: AnyScreenSource) -> Bool {
         lhs.wrapped == rhs.wrapped
     }

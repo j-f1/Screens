@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ScreenSource: AnyObject, Hashable {
+protocol ScreenSource: AnyObject, Hashable, Codable {
     func update() async throws -> [Screen]
     func command(for screen: Screen) -> String
     var screenCommand: String { get }

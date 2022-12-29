@@ -17,6 +17,13 @@ final class SSHScreenSource: ScreenSource {
         self.port = port
     }
 
+    private enum CodingKeys: CodingKey {
+        case screenCommand
+        case username
+        case host
+        case port
+    }
+
     let screenCommand: String
     let username: String
     let host: String

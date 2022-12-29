@@ -8,18 +8,21 @@
 import Foundation
 import SwiftUI
 
-class SourceObserver: ObservableObject, Identifiable {
-    private var timer: Timer?
-    
+class SourceObserver: ObservableObject, Identifiable, Equatable, Codable {
+    // persisted
     @Published var source: AnyScreenSource
     @Published var customTitle: String = ""
+
     var title: String {
         customTitle.isEmpty ? source.title : customTitle
     }
+
+    // not persisted
+    private var timer: Timer?
     @Published var screens = [Screen]()
     @Published var error: Error?
 
-    init(source: some ScreenSource) {
+    init(source: any ScreenSource) {
         self.source = AnyScreenSource(source)
 
         let timer = Timer(fire: .now, interval: 1, repeats: true) { [weak self] _ in
@@ -27,6 +30,26 @@ class SourceObserver: ObservableObject, Identifiable {
         }
         RunLoop.main.add(timer, forMode: .default)
         self.timer = timer
+    }
+
+    required convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try container.decode(AnyScreenSource.WrappedType.self, forKey: .type)
+        self.init(source: try container.decode(type.type, forKey: .options))
+        self.customTitle = try container.decode(String.self, forKey: .customTitle)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(source.wrapped.type, forKey: .type)
+        try container.encode(source.wrapped.value, forKey: .options)
+        try container.encode(customTitle, forKey: .customTitle)
+    }
+    
+    private enum CodingKeys: CodingKey {
+        case type
+        case options
+        case customTitle
     }
     
     func update() {
@@ -47,5 +70,9 @@ class SourceObserver: ObservableObject, Identifiable {
     
     deinit {
         timer?.invalidate()
+    }
+    
+    static func == (lhs: SourceObserver, rhs: SourceObserver) -> Bool {
+        lhs === rhs
     }
 }
