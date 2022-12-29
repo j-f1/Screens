@@ -21,6 +21,9 @@ struct ScreensApp: App {
                 NSApp.activate(ignoringOtherApps: true)
                 openWindow(id: "Settings")
             }.keyboardShortcut(",")
+            Button("Quit") {
+                NSApp.terminate(nil)
+            }.keyboardShortcut("Q")
         } label: {
             Image(systemName: "terminal")
         }
