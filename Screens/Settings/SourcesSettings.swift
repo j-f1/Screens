@@ -16,12 +16,15 @@ struct SourcesSettings: View {
                     sources = sources.filter { $0 !== model }
                 })
             }
-            Section { } footer: {
-                Text("Double-click a source name to rename it.\nClick \(Image(systemName: "plus")) above to add a new source.")
-                    .imageScale(.small)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
+            if !sources.isEmpty {
+                Section { } footer: {
+                    Text("Double-click a source name to rename it.\nClick \(Image(systemName: "plus")) above to add a new source.")
+                        .imageScale(.small)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 20)
+                }
             }
         }.toolbar {
             Menu {
