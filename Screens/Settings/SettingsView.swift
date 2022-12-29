@@ -17,33 +17,13 @@ struct SettingsView: View {
         case behavior
     }
     
-    private struct Label: View {
-        let title: LocalizedStringKey
-        let icon: String
-        let color: Color
-
-        var body: some View {
-            SwiftUI.Label {
-                Text(title)
-            } icon: {
-                Image(systemName: icon)
-                    .font(.system(size: 9))
-                    .foregroundColor(.white)
-                    .padding(3)
-                    .background(color.gradient)
-                    .cornerRadius(3)
-                    .shadow(color: .black.opacity(0.1), radius: 1, y: 2)
-            }
-        }
-    }
-
     var body: some View {
         NavigationSplitView {
             List(selection: $tab) {
-                Label(title: "Sources", icon: "tray.2", color: .gray)
+                SettingsTabLabel("Sources", icon: "eye.fill", color: .indigo)
                     .badge(sources.count)
                     .tag(Tab.sources)
-                Label(title: "Behavior", icon: "mail.and.text.magnifyingglass", color: .purple)
+                SettingsTabLabel("Behavior", icon: "gearshape.fill", color: .purple)
                     .tag(Tab.behavior)
             }
             .navigationSplitViewColumnWidth(145)
@@ -62,24 +42,7 @@ struct SettingsView: View {
         var body: some View {
             switch tab {
             case .sources:
-                Form {
-                    ForEach(sources) { model in
-                        SourceConfiguration(model: model, onDelete: {
-                            sources = sources.filter { $0.source != model.source }
-                        })
-                    }
-                }.toolbar {
-                    Menu {
-                        Button("Local") {
-                            sources.append(SourceObserver(source: LocalScreenSource()))
-                        }
-                        Button("SSH") {
-                            sources.append(SourceObserver(source: SSHScreenSource(username: "", host: "")))
-                        }
-                    } label: {
-                        SwiftUI.Label("Add Source", systemImage: "plus")
-                    }
-                }
+                SourcesSettings(sources: $sources)
             case .behavior:
                 Text("haha")
             }
