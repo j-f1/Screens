@@ -15,6 +15,8 @@
 		85020EE8295DFE08008C6285 /* SourceTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85020EE7295DFE08008C6285 /* SourceTitle.swift */; };
 		85020EEA295DFF6D008C6285 /* SourcesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85020EE9295DFF6D008C6285 /* SourcesSettings.swift */; };
 		85020EEC295DFFA8008C6285 /* SettingsTabLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85020EEB295DFFA8008C6285 /* SettingsTabLabel.swift */; };
+		85020EEE295E052F008C6285 /* BehaviorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85020EED295E052F008C6285 /* BehaviorSettings.swift */; };
+		85020EF4295E05DD008C6285 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 85020EF3295E05DD008C6285 /* LaunchAtLogin */; };
 		8504378F2958D34000F9424C /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504378E2958D34000F9424C /* Screen.swift */; };
 		850437912958D3F300F9424C /* AnyScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437902958D3F300F9424C /* AnyScreenSource.swift */; };
 		850437932958D40E00F9424C /* LocalScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437922958D40E00F9424C /* LocalScreenSource.swift */; };
@@ -72,6 +74,7 @@
 		85020EE7295DFE08008C6285 /* SourceTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTitle.swift; sourceTree = "<group>"; };
 		85020EE9295DFF6D008C6285 /* SourcesSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesSettings.swift; sourceTree = "<group>"; };
 		85020EEB295DFFA8008C6285 /* SettingsTabLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabLabel.swift; sourceTree = "<group>"; };
+		85020EED295E052F008C6285 /* BehaviorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorSettings.swift; sourceTree = "<group>"; };
 		8504378D2958CE5600F9424C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8504378E2958D34000F9424C /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		850437902958D3F300F9424C /* AnyScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyScreenSource.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85020EF4295E05DD008C6285 /* LaunchAtLogin in Frameworks */,
 				850437962958DCF400F9424C /* Shout in Frameworks */,
 				856F94E92958E99C00DEE579 /* libcrypto.1.1.dylib in Frameworks */,
 				85020EDB295DF152008C6285 /* Introspect in Frameworks */,
@@ -133,6 +137,7 @@
 			children = (
 				85020EE3295DFBEA008C6285 /* MonospaceTextField.swift */,
 				856F94EC2959008F00DEE579 /* SettingsView.swift */,
+				85020EED295E052F008C6285 /* BehaviorSettings.swift */,
 				85020EEB295DFFA8008C6285 /* SettingsTabLabel.swift */,
 				856F94EE295901E200DEE579 /* SourceConfiguration.swift */,
 				85020EE9295DFF6D008C6285 /* SourcesSettings.swift */,
@@ -217,6 +222,7 @@
 			packageProductDependencies = (
 				850437952958DCF400F9424C /* Shout */,
 				85020EDA295DF152008C6285 /* Introspect */,
+				85020EF3295E05DD008C6285 /* LaunchAtLogin */,
 			);
 			productName = Screens;
 			productReference = 85CBBFA22954CD8D00E3C634 /* Screens.app */;
@@ -249,6 +255,7 @@
 			packageReferences = (
 				850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */,
 				85020ED9295DF152008C6285 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				85020EF2295E05DD008C6285 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = 85CBBFA32954CD8D00E3C634 /* Products */;
 			projectDirPath = "";
@@ -282,6 +289,7 @@
 				85CBBFB52954CDE500E3C634 /* SourceObserver.swift in Sources */,
 				856F94ED2959008F00DEE579 /* SettingsView.swift in Sources */,
 				85020EE4295DFBEA008C6285 /* MonospaceTextField.swift in Sources */,
+				85020EEE295E052F008C6285 /* BehaviorSettings.swift in Sources */,
 				85020EEA295DFF6D008C6285 /* SourcesSettings.swift in Sources */,
 				850437932958D40E00F9424C /* LocalScreenSource.swift in Sources */,
 				856F94EF295901E200DEE579 /* SourceConfiguration.swift in Sources */,
@@ -523,6 +531,14 @@
 				revision = d3cbf32788250741d397cfb5bcd532c37aa1096d;
 			};
 		};
+		85020EF2295E05DD008C6285 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jakeheis/Shout";
@@ -538,6 +554,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 85020ED9295DF152008C6285 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		85020EF3295E05DD008C6285 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85020EF2295E05DD008C6285 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
 		};
 		850437952958DCF400F9424C /* Shout */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -44,7 +44,7 @@ struct SettingsView: View {
             case .sources:
                 SourcesSettings(sources: $sources)
             case .behavior:
-                Text("haha")
+                BehaviorSettings()
             }
         }
     }

@@ -17,10 +17,12 @@ struct ScreensApp: App {
     var body: some Scene {
         MenuBarExtra {
             ContentView(sources: sources)
+
             Button("Settings…") {
                 NSApp.activate(ignoringOtherApps: true)
                 openWindow(id: "Settings")
             }.keyboardShortcut(",")
+
             Button("Quit") {
                 NSApp.terminate(nil)
             }.keyboardShortcut("Q")
@@ -30,6 +32,7 @@ struct ScreensApp: App {
 
         Window("Screens Settings", id: "Settings") {
             SettingsView(sources: $sources)
+                .frame(minWidth: 510)
         }
         .windowToolbarStyle(.unifiedCompact)
         .windowResizability(.contentSize)

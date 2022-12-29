@@ -19,9 +19,18 @@ struct ContentView: View {
 
 struct ModelSection: View {
     @ObservedObject var model: SourceObserver
+
+    @AppStorage("hideEmpty") private var hideEmpty = false
+
     var body: some View {
-        if model.screens.isEmpty {
-            Section("\(model.title) — No Active Screens") {}
+        if model.error != nil {
+            Section("\(model.title) — Error") {
+                Text("Open Settings to debug")
+            }
+        } else if model.screens.isEmpty {
+            if !hideEmpty {
+                Section("\(model.title) — No Active Screens") {}
+            }
         } else {
             Section(model.title) {
                 ForEach(model.screens) { screen in
