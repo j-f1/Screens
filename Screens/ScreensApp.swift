@@ -14,11 +14,11 @@ struct ScreensApp: App {
         ViewModel(source: SSHScreenSource(username: "jed", host: "mini")),
     ]
     var body: some Scene {
-//        MenuBarExtra {
-//            ContentView()
-//        } label: {
-//            Image(systemName: "terminal")
-//        }
+        MenuBarExtra {
+            ContentView(models: models)
+        } label: {
+            Image(systemName: "terminal")
+        }
 
         WindowGroup {
             ContentView(models: models)
