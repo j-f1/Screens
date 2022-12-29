@@ -51,6 +51,10 @@ struct Screen: Identifiable {
 
 extension [Screen] {
     init?(source: some ScreenSource, screenOutput: String) {
+        if screenOutput.starts(with: "No Sockets found in") {
+            self = []
+            return
+        }
         let sections = screenOutput
             .split(separator: "\r\n")
         guard let content = sections.dropFirst().first else { return nil }
