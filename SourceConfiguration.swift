@@ -90,6 +90,7 @@ struct SourceTitle: View {
     @ObservedObject var model: ViewModel
     let onDelete: () -> Void
     @State private var isEditing = false
+    @State private var isDeleting = false
     @FocusState var textFieldFocused
 
     var body: some View {
@@ -113,9 +114,13 @@ struct SourceTitle: View {
                     }
             }
             Spacer()
-            Button("Delete", action: onDelete)
+            Button("Delete…") { isDeleting = true }
                 .controlSize(.small)
                 .font(.caption)
+                .confirmationDialog("Permanently delete “\(model.title)?”", isPresented: $isDeleting) {
+                    Text("This action cannot be undone!")
+                    Button("Delete", role: .destructive, action: onDelete)
+                }
         }
     }
 }
