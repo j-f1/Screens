@@ -24,6 +24,7 @@ class LocalScreenSource: ScreenSource {
                 proc.arguments = ["-c", "\(screenCommand) -list"]
                 let pipe = Pipe()
                 proc.standardOutput = pipe.fileHandleForWriting
+                proc.standardError = pipe.fileHandleForWriting
                 proc.terminationHandler = { proc in
                     do {
                         try pipe.fileHandleForWriting.close()
