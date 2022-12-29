@@ -14,12 +14,37 @@ struct SettingsView: View {
     @State private var tab = Tab.sources
     private enum Tab {
         case sources
+        case behavior
     }
     
+    private struct Label: View {
+        let title: LocalizedStringKey
+        let icon: String
+        let color: Color
+
+        var body: some View {
+            SwiftUI.Label {
+                Text(title)
+            } icon: {
+                Image(systemName: icon)
+                    .font(.system(size: 9))
+                    .foregroundColor(.white)
+                    .padding(3)
+                    .background(color.gradient)
+                    .cornerRadius(3)
+                    .shadow(color: .black.opacity(0.1), radius: 1, y: 2)
+            }
+        }
+    }
+
     var body: some View {
-        NavigationSplitView(columnVisibility: .constant(.doubleColumn)) {
+        NavigationSplitView {
             List(selection: $tab) {
-                Label("Sources", systemImage: "tray.2.fill").tag(Tab.sources)
+                Label(title: "Sources", icon: "tray.2", color: .gray)
+                    .badge(models.count)
+                    .tag(Tab.sources)
+                Label(title: "Behavior", icon: "mail.and.text.magnifyingglass", color: .purple)
+                    .tag(Tab.behavior)
             }
             .navigationSplitViewColumnWidth(145)
         } detail: {
@@ -27,14 +52,7 @@ struct SettingsView: View {
                 .formStyle(.grouped)
                 .navigationSplitViewColumnWidth(355)
         }
-        .frame(width: 500)
         .navigationSplitViewStyle(.prominentDetail)
-        .introspect(selector: { $0 }) { view in
-            if let toolbar = view.window?.toolbar,
-               let toggleIdx = toolbar.items.firstIndex(where: { $0.itemIdentifier.rawValue.contains("toggleSidebar") }) {
-                toolbar.removeItem(at: toggleIdx)
-            }
-        }
     }
     
     private struct Content: View {
@@ -59,11 +77,18 @@ struct SettingsView: View {
                             models.append(ViewModel(source: SSHScreenSource(username: "", host: "")))
                         }
                     } label: {
-                        Label("Add Source", systemImage: "plus")
+                        SwiftUI.Label("Add Source", systemImage: "plus")
                     }
-
                 }
+            case .behavior:
+                Text("haha")
             }
         }
+    }
+}
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(models: .constant([]))
     }
 }
