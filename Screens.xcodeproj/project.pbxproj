@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85020EDB295DF152008C6285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 85020EDA295DF152008C6285 /* Introspect */; };
 		8504378F2958D34000F9424C /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8504378E2958D34000F9424C /* Screen.swift */; };
 		850437912958D3F300F9424C /* ScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437902958D3F300F9424C /* ScreenSource.swift */; };
 		850437932958D40E00F9424C /* LocalScreenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850437922958D40E00F9424C /* LocalScreenSource.swift */; };
@@ -86,6 +87,7 @@
 			files = (
 				850437962958DCF400F9424C /* Shout in Frameworks */,
 				856F94E92958E99C00DEE579 /* libcrypto.1.1.dylib in Frameworks */,
+				85020EDB295DF152008C6285 /* Introspect in Frameworks */,
 				856F94E32958E94F00DEE579 /* libssl.1.1.dylib in Frameworks */,
 				856F94DF2958E36900DEE579 /* libssh2.1.dylib in Frameworks */,
 			);
@@ -172,6 +174,7 @@
 			name = Screens;
 			packageProductDependencies = (
 				850437952958DCF400F9424C /* Shout */,
+				85020EDA295DF152008C6285 /* Introspect */,
 			);
 			productName = Screens;
 			productReference = 85CBBFA22954CD8D00E3C634 /* Screens.app */;
@@ -203,6 +206,7 @@
 			mainGroup = 85CBBF992954CD8D00E3C634;
 			packageReferences = (
 				850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */,
+				85020ED9295DF152008C6285 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 85CBBFA32954CD8D00E3C634 /* Products */;
 			projectDirPath = "";
@@ -463,6 +467,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		85020ED9295DF152008C6285 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = revision;
+				revision = d3cbf32788250741d397cfb5bcd532c37aa1096d;
+			};
+		};
 		850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jakeheis/Shout";
@@ -474,6 +486,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		85020EDA295DF152008C6285 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85020ED9295DF152008C6285 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		850437952958DCF400F9424C /* Shout */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 850437942958DCF400F9424C /* XCRemoteSwiftPackageReference "Shout" */;

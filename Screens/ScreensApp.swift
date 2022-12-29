@@ -31,6 +31,8 @@ struct ScreensApp: App {
         
         Window("Screens Settings", id: "Settings") {
             SettingsView(models: $models)
-        }.windowResizability(.contentSize)
+        }
+        .windowToolbarStyle(.unifiedCompact)
+        .windowResizability(.contentSize)
     }
 }

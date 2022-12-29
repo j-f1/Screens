@@ -116,7 +116,7 @@ struct SourceTitle: View {
             Spacer()
             Button("Delete…") { isDeleting = true }
                 .controlSize(.small)
-                .font(.caption)
+                .font(.caption2)
                 .confirmationDialog("Permanently delete “\(model.title)?”", isPresented: $isDeleting) {
                     Text("This action cannot be undone!")
                     Button("Delete", role: .destructive, action: onDelete)
