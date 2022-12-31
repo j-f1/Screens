@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                 }
 
                 repeat {
-                    target += Duration(config.options.updateFrequency)
+                    target += Duration(max(config.options.updateFrequency, 0.5))
                 } while target < .now
 
                 try await Task.sleep(until: target, tolerance: Duration(config.options.updateFrequency / 2), clock: .suspending)
