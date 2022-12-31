@@ -18,3 +18,13 @@ You can customize the following options, in addition to the sources:
 - Update frequency (seconds, min 0.5, can use fractions if desired): how often to ping all of the different `screen` instances. A higher value means less CPU and energy usage. This is not an exact measure, the system may choose to slightly adjust the interval to improve system performance.
 - Hide empty sources: remove sources with no active screens from the list in the menu bar rather than displaying them with a “No active screens” message
 - Launch at login: automatically start the app at login.
+
+## Building Locally
+
+Make sure you have the relevant libraries installed:
+
+```shellsession
+$ brew install libssh2 openssl
+```
+
+Then build & run! You might encounter an error about a cyclic build dependency. I’m not sure why that happens but you should be able to do a clean and rebuilt to fix it.
