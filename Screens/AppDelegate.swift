@@ -25,6 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         )
     }
     
+    var encodedConfig: Data? = try? Data(contentsOf: Config.configURL)
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         Task {
             var target = SuspendingClock.now
@@ -32,6 +34,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                 for source in config.sources {
                     source.update()
                 }
+
+                if let encoded = try? config.encoded {
+                    if encodedConfig != encoded {
+                        encodedConfig = encoded
+                        try encoded.write(to: Config.configURL, options: .atomic)
+                    }
+                }
+
                 repeat {
                     target += Duration(config.options.updateFrequency)
                 } while target < .now

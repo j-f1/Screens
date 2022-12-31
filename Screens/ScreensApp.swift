@@ -34,7 +34,6 @@ struct ScreensApp: App {
             SettingsView()
                 .environmentObject(appDelegate)
                 .frame(minWidth: 510)
-                .onDisappear { appDelegate.config.save() }
         }
         .windowToolbarStyle(.unifiedCompact)
         .windowResizability(.contentSize)

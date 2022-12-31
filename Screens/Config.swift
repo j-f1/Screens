@@ -35,11 +35,15 @@ struct Config: Codable {
         return encoder
     }()
     
+    var encoded: Data {
+        get throws {
+            try Self.encoder.encode(self)
+        }
+    }
     func save() {
         do {
-            let data = try Self.encoder.encode(self)
             try FileManager.default.createDirectory(at: Self.configURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-            try data.write(to: Self.configURL)
+            try encoded.write(to: Self.configURL)
         } catch {
             print(error)
         }
