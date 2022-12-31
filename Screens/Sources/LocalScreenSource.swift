@@ -18,7 +18,7 @@ class LocalScreenSource: ScreenSource {
 
     func update() async throws -> [Screen] {
         try await withCheckedThrowingContinuation { continuation in
-            DispatchQueue.global().async { [self] in
+            DispatchQueue.global(qos: .utility).async { [self] in
                 let proc = Process()
                 proc.executableURL = URL(fileURLWithPath: "/bin/zsh")
                 proc.arguments = ["-c", "\(screenCommand) -list"]

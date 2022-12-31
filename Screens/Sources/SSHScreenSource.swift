@@ -47,7 +47,13 @@ final class SSHScreenSource: ScreenSource {
     func update() async throws -> [Screen] {
         let connection = try currentConnection()
         do {
-            return try readScreens(from: connection)
+            return try await withCheckedThrowingContinuation { continuation in
+                DispatchQueue.global(qos: .utility).async {
+                    continuation.resume(with: Result {
+                        try self.readScreens(from: connection)
+                    })
+                }
+            }
         } catch {
             // reconnect
             self.connection = nil
