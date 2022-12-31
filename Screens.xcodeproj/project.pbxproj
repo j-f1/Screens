@@ -84,9 +84,9 @@
 		850437902958D3F300F9424C /* AnyScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyScreenSource.swift; sourceTree = "<group>"; };
 		850437922958D40E00F9424C /* LocalScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalScreenSource.swift; sourceTree = "<group>"; };
 		850437972958DCFD00F9424C /* SSHScreenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHScreenSource.swift; sourceTree = "<group>"; };
-		850437B62958E2A800F9424C /* libssh2.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh2.1.dylib; path = ../../../../../opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.1.dylib; sourceTree = "<group>"; };
+		850437B62958E2A800F9424C /* libssh2.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh2.1.dylib; path = /opt/homebrew/Cellar/libssh2/1.10.0/lib/libssh2.1.dylib; sourceTree = "<absolute>"; };
 		855149CB29609AD900943D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		856F94E22958E94F00DEE579 /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = "../../../../../opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libssl.1.1.dylib"; sourceTree = "<group>"; };
+		856F94E22958E94F00DEE579 /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = "/opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libssl.1.1.dylib"; sourceTree = "<absolute>"; };
 		856F94E72958E97400DEE579 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = "/opt/homebrew/Cellar/openssl@1.1/1.1.1s/lib/libcrypto.1.1.dylib"; sourceTree = "<absolute>"; };
 		856F94EC2959008F00DEE579 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		856F94EE295901E200DEE579 /* SourceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceConfiguration.swift; sourceTree = "<group>"; };
