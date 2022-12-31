@@ -91,6 +91,7 @@
 		856F94EC2959008F00DEE579 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		856F94EE295901E200DEE579 /* SourceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceConfiguration.swift; sourceTree = "<group>"; };
 		859D26332959E7C2007EDBBE /* ScreenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenError.swift; sourceTree = "<group>"; };
+		85BABF132960C9B300FEEE14 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		85CBBFA22954CD8D00E3C634 /* Screens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85CBBFA52954CD8D00E3C634 /* ScreensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensApp.swift; sourceTree = "<group>"; };
 		85CBBFA72954CD8D00E3C634 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		85CBBF992954CD8D00E3C634 = {
 			isa = PBXGroup;
 			children = (
+				85BABF132960C9B300FEEE14 /* README.md */,
 				85CBBFA42954CD8D00E3C634 /* Screens */,
 				85CBBFA32954CD8D00E3C634 /* Products */,
 				850437992958DFFE00F9424C /* Frameworks */,
