@@ -16,6 +16,7 @@ struct ScreensApp: App {
     var body: some Scene {
         MenuBarExtra {
             ContentView()
+                .environmentObject(appDelegate)
 
             Button("Settings…") {
                 NSApp.activate(ignoringOtherApps: true)
@@ -31,6 +32,7 @@ struct ScreensApp: App {
 
         Window("Screens Settings", id: "Settings") {
             SettingsView()
+                .environmentObject(appDelegate)
                 .frame(minWidth: 510)
                 .onDisappear { appDelegate.config.save() }
         }
