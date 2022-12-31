@@ -563,8 +563,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jakeheis/Shout";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.5.7;
+				kind = revision;
+				revision = 4f2a85b027fa6c5b5bf6e870f1448242f55cb336;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

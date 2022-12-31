@@ -38,7 +38,7 @@ final class SSHScreenSource: ScreenSource {
         if let connection {
             return connection
         }
-        let connection = try SSH(host: host, port: port)
+        let connection = try SSH(host: host, port: port, timeout: 5000)
         try connection.authenticate(username: username, authMethod: SSHKey(privateKey: "/Users/\(NSUserName())/.ssh/id_ed25519", passphrase: ""))
         self.connection = connection
         return connection

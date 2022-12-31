@@ -32,8 +32,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jakeheis/Shout",
       "state" : {
-        "revision" : "fbcae228bc68d5e2352f0790079995d27b610dbc",
-        "version" : "0.5.7"
+        "revision" : "4f2a85b027fa6c5b5bf6e870f1448242f55cb336"
       }
     },
     {
