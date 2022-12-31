@@ -9,7 +9,7 @@ import SwiftUI
 import Introspect
 
 struct SettingsView: View {
-    @Binding var config: Config
+    @EnvironmentObject var appDelegate: AppDelegate
     
     @State private var tab = Tab.sources
     private enum Tab {
@@ -21,14 +21,14 @@ struct SettingsView: View {
         NavigationSplitView {
             List(selection: $tab) {
                 SettingsTabLabel("Sources", icon: "eye.fill", color: .indigo)
-                    .badge(config.sources.count)
+                    .badge(appDelegate.config.sources.count)
                     .tag(Tab.sources)
                 SettingsTabLabel("Behavior", icon: "gearshape.fill", color: .purple)
                     .tag(Tab.behavior)
             }
             .navigationSplitViewColumnWidth(145)
         } detail: {
-            Content(tab: tab, config: $config)
+            Content(tab: tab, config: $appDelegate.config)
                 .formStyle(.grouped)
                 .navigationSplitViewColumnWidth(355)
         }
@@ -52,6 +52,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(config: .constant(Config()))
+        SettingsView()
+            .environmentObject(AppDelegate())
     }
 }

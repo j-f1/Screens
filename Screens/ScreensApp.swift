@@ -10,13 +10,12 @@ import Combine
 
 @main
 struct ScreensApp: App {
-    @State private var config = Config.load()
+    @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
         MenuBarExtra {
-            ContentView(sources: config.sources)
-                .environment(\.options, config.options)
+            ContentView()
 
             Button("Settings…") {
                 NSApp.activate(ignoringOtherApps: true)
@@ -31,10 +30,9 @@ struct ScreensApp: App {
         }
 
         Window("Screens Settings", id: "Settings") {
-            SettingsView(config: $config)
-                .environment(\.options, config.options)
+            SettingsView()
                 .frame(minWidth: 510)
-                .onDisappear(perform: config.save)
+                .onDisappear { appDelegate.config.save() }
         }
         .windowToolbarStyle(.unifiedCompact)
         .windowResizability(.contentSize)

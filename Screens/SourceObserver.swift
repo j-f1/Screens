@@ -18,18 +18,11 @@ class SourceObserver: ObservableObject, Identifiable, Equatable, Codable {
     }
 
     // not persisted
-    private var timer: Timer?
     @Published var screens = [Screen]()
     @Published var error: Error?
 
     init(source: any ScreenSource) {
         self.source = AnyScreenSource(source)
-
-        let timer = Timer(fire: .now, interval: 1, repeats: true) { [weak self] _ in
-            self?.update()
-        }
-        RunLoop.main.add(timer, forMode: .default)
-        self.timer = timer
     }
 
     required convenience init(from decoder: Decoder) throws {
@@ -66,10 +59,6 @@ class SourceObserver: ObservableObject, Identifiable, Equatable, Codable {
                 }
             }
         }
-    }
-    
-    deinit {
-        timer?.invalidate()
     }
     
     static func == (lhs: SourceObserver, rhs: SourceObserver) -> Bool {

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    let sources: [SourceObserver]
+    @EnvironmentObject var appDelegate: AppDelegate
 
     var body: some View {
-        ForEach(sources) { model in
+        ForEach(appDelegate.config.sources) { model in
             ModelSection(model: model)
         }
     }
@@ -70,6 +70,7 @@ struct ScreenButton: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(sources: [.init(source: LocalScreenSource())])
+        ContentView()
+            .environmentObject(AppDelegate(config: Config(sources: [.init(source: LocalScreenSource())])))
     }
 }
