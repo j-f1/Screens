@@ -48,7 +48,7 @@ struct ScreenButton: View {
         let appleScript = NSAppleScript(source: """
             tell application "Terminal"
                 activate
-                do script "\(script)"
+                do script "\(script) && exit"
             end tell
         """)!
         var error: NSDictionary?
