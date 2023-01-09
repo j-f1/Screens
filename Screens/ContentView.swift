@@ -52,7 +52,9 @@ struct ScreenButton: View {
             end tell
         """)!
         var error: NSDictionary?
-        appleScript.executeAndReturnError(&error)
+        DispatchQueue.global(qos: .userInitiated).async {
+            appleScript.executeAndReturnError(&error)
+        }
         return error
     }
     
