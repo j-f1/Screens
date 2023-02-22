@@ -6,8 +6,17 @@
 //
 
 import Foundation
-import Shout
+@preconcurrency import Shout
 import SwiftUI
+
+@globalActor
+private actor ConnectionsActor: GlobalActor {
+    static let shared = ConnectionsActor()
+
+    private init() {}
+
+    typealias ActorType = ConnectionsActor
+}
 
 final class SSHScreenSource: ScreenSource {
     internal init(screenCommand: String = "screen", username: String, host: String, port: Int32 = 22) {

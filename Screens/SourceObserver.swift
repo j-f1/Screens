@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class SourceObserver: ObservableObject, Identifiable, Equatable, Codable {
     // persisted
     @Published var source: AnyScreenSource
@@ -61,7 +62,7 @@ class SourceObserver: ObservableObject, Identifiable, Equatable, Codable {
         }
     }
     
-    static func == (lhs: SourceObserver, rhs: SourceObserver) -> Bool {
+    nonisolated static func == (lhs: SourceObserver, rhs: SourceObserver) -> Bool {
         lhs === rhs
     }
 }

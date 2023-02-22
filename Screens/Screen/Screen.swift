@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Screen: Identifiable {
+struct Screen: Identifiable, Sendable {
     let pid: pid_t
     let name: String
     let status: Status

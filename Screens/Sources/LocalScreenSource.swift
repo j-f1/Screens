@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class LocalScreenSource: ScreenSource {
+final class LocalScreenSource: ScreenSource {
     init(screenCommand: String = "screen") {
         self.screenCommand = screenCommand
     }
