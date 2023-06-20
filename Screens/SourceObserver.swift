@@ -51,7 +51,7 @@ class SourceObserver: ObservableObject, Identifiable, Equatable, Codable {
             do {
                 let screens = try await source.update()
                 await MainActor.run {
-                    self.screens = screens
+                    self.screens = screens.sorted(using: KeyPathComparator(\.name))
                     self.error = nil
                 }
             } catch {
